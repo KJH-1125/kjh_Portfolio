@@ -1,0 +1,280 @@
+---
+const careers = [
+  {
+    company: '(주)코리아소프트',
+    role: '과장 / 개발PM',
+    periods: ['2025.07 ~ 현재', '2019.07 ~ 2022.12'],
+    projects: [
+      '아성 WMS 구축',
+      '네패스 APS 구축',
+      '소프트엔바이오 의료기기 공급 시스템 구축',
+      '세니젠 WMS 구축',
+      'KJI WMS 구축',
+      '보뚜슈퍼푸드 WMS 구축',
+    ],
+    stack: ['C#', 'MSSQL', 'Vue'],
+  },
+  {
+    company: '(주)에이티지소프트',
+    role: '선임연구원 / 팀장 / SI개발',
+    periods: ['2023.04 ~ 2025.03'],
+    projects: [
+      '(주)선진인더스트리 온양지점 MES 구축',
+      '(주)이엔케이 스마트공장 구축',
+      '(주)문교오엔에스 MES 구축',
+      '한국제이에스티 MES 구축',
+    ],
+    stack: ['ASP', 'C#', 'MSSQL'],
+  },
+];
+---
+
+<section class="career-section" id="career">
+  <div class="section">
+    <div class="section-label reveal">Career</div>
+    <h2 class="section-title reveal reveal-delay-1">경력</h2>
+
+    <div class="timeline">
+      {
+        careers.map((career, i) => (
+          <div class={`timeline-item reveal reveal-delay-${Math.min(i + 2, 4)}`}>
+            {/* Timeline dot & line */}
+            <div class="timeline-marker">
+              <div class="timeline-dot" />
+              <div class="timeline-line" />
+            </div>
+
+            {/* Content */}
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3 class="timeline-company">{career.company}</h3>
+                <span class="timeline-role">{career.role}</span>
+                <div class="timeline-periods">
+                  {career.periods.map((period) => (
+                    <span class="timeline-period">{period}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div class="timeline-body">
+                <h4 class="timeline-subtitle">주요 프로젝트</h4>
+                <ul class="timeline-projects">
+                  {career.projects.map((project) => (
+                    <li>{project}</li>
+                  ))}
+                </ul>
+
+                <div class="timeline-stack">
+                  {career.stack.map((tech) => (
+                    <span class="stack-tag">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .career-section {
+    padding-top: var(--section-gap);
+    padding-bottom: var(--section-gap);
+    position: relative;
+  }
+
+  .career-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(600px, 80%);
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--border) 20%,
+      var(--accent-gold-dim) 50%,
+      var(--border) 80%,
+      transparent
+    );
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 28px;
+    position: relative;
+  }
+
+  /* ── Marker (dot + line) ── */
+  .timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    padding-top: 6px;
+  }
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 2px solid var(--accent-gold);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-item:first-child .timeline-dot {
+    background: var(--accent-gold);
+    box-shadow: 0 0 12px rgba(232, 196, 104, 0.3);
+  }
+
+  .timeline-line {
+    width: 1px;
+    flex: 1;
+    background: var(--border);
+    margin-top: 8px;
+  }
+
+  .timeline-item:last-child .timeline-line {
+    background: linear-gradient(to bottom, var(--border), transparent);
+  }
+
+  /* ── Content ── */
+  .timeline-content {
+    flex: 1;
+    padding-bottom: 48px;
+  }
+
+  .timeline-item:last-child .timeline-content {
+    padding-bottom: 0;
+  }
+
+  .timeline-header {
+    margin-bottom: 20px;
+  }
+
+  .timeline-company {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .timeline-role {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent-gold);
+    margin-bottom: 8px;
+  }
+
+  .timeline-periods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .timeline-period {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .timeline-periods .timeline-period:not(:last-child)::after {
+    content: '|';
+    margin-left: 8px;
+    color: var(--border);
+  }
+
+  /* ── Body ── */
+  .timeline-body {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .timeline-subtitle {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .timeline-projects {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .timeline-projects li {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .timeline-projects li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 1px;
+    background: var(--text-muted);
+  }
+
+  /* ── Stack tags ── */
+  .timeline-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 4px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+
+  .stack-tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent-gold);
+    padding: 4px 12px;
+    background: var(--accent-gold-dim);
+    border: 1px solid rgba(232, 196, 104, 0.15);
+    border-radius: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .timeline-item {
+      gap: 20px;
+    }
+
+    .timeline-company {
+      font-size: 18px;
+    }
+  }
+</style>
