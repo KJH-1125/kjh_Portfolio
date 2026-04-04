@@ -1,0 +1,223 @@
+---
+
+---
+
+<section class="hero" id="hero">
+  <!-- Ambient glow -->
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <div class="hero-greeting reveal">
+      <span class="greeting-line"></span>
+      <span class="greeting-text">안녕하세요</span>
+    </div>
+
+    <h1 class="hero-name reveal reveal-delay-1">
+      김지훈<span class="dot">.</span>
+    </h1>
+
+    <p class="hero-role reveal reveal-delay-2">
+      Frontend Developer
+    </p>
+
+    <p class="hero-desc reveal reveal-delay-3">
+      사용자 경험을 중심으로 생각하는 프론트엔드 개발자입니다.<br />
+      깔끔한 코드와 섬세한 인터랙션으로 가치를 만들어갑니다.
+    </p>
+
+    <div class="hero-cta reveal reveal-delay-4">
+      <a href="#projects" class="btn-primary">
+        프로젝트 보기
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#about" class="btn-ghost">About Me</a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator reveal reveal-delay-4">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 24px 80px;
+    overflow: hidden;
+  }
+
+  /* ── Ambient background glow ── */
+  .hero-glow {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 500px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(232, 196, 104, 0.04) 0%,
+      rgba(232, 196, 104, 0.015) 40%,
+      transparent 70%
+    );
+    pointer-events: none;
+    animation: glowPulse 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowPulse {
+    0% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+  }
+
+  .hero-content {
+    max-width: var(--max-width);
+    width: 100%;
+  }
+
+  .hero-greeting {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .greeting-line {
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent-gold);
+    opacity: 0.6;
+  }
+
+  .greeting-text {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--accent-gold);
+    letter-spacing: 0.06em;
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 10vw, 96px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+
+  .dot {
+    color: var(--accent-gold);
+  }
+
+  .hero-role {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+    margin-bottom: 28px;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 44px;
+  }
+
+  /* ── CTA Buttons ── */
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bg-primary);
+    background: var(--accent-gold);
+    border-radius: 8px;
+    transition:
+      transform 0.25s var(--ease-out-expo),
+      box-shadow 0.25s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(232, 196, 104, 0.2);
+  }
+
+  .btn-primary svg {
+    transition: transform 0.25s var(--ease-out-expo);
+  }
+
+  .btn-primary:hover svg {
+    transform: translateX(3px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 28px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition:
+      color 0.25s,
+      border-color 0.25s,
+      transform 0.25s var(--ease-out-expo);
+  }
+
+  .btn-ghost:hover {
+    color: var(--text-primary);
+    border-color: var(--text-muted);
+    transform: translateY(-2px);
+  }
+
+  /* ── Scroll indicator ── */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--accent-gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
+    50% { opacity: 0.8; transform: scaleY(1); }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 100px 20px 60px;
+    }
+    .hero-desc br {
+      display: none;
+    }
+  }
+</style>

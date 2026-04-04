@@ -1,0 +1,248 @@
+---
+const navItems = [
+  { label: 'Home', href: '#hero' },
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+];
+---
+
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#hero" class="logo">
+      <span class="logo-symbol">K</span>
+      <span class="logo-text">jihoon</span>
+    </a>
+
+    <nav class="nav" id="nav">
+      {
+        navItems.map((item) => (
+          <a href={item.href} class="nav-link">
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기">
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile overlay -->
+<div class="mobile-nav-overlay" id="mobileOverlay">
+  <nav class="mobile-nav">
+    {
+      navItems.map((item) => (
+        <a href={item.href} class="mobile-nav-link">
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+</div>
+
+<script>
+  const toggle = document.getElementById('menuToggle')!;
+  const overlay = document.getElementById('mobileOverlay')!;
+  const header = document.getElementById('header')!;
+
+  toggle.addEventListener('click', () => {
+    const open = overlay.classList.toggle('open');
+    toggle.classList.toggle('open');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  overlay.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => {
+      overlay.classList.remove('open');
+      toggle.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Header scroll effect
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 60);
+    header.classList.toggle('hidden', y > lastY && y > 400);
+    lastY = y;
+  });
+</script>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 24px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    transition:
+      background 0.35s ease,
+      transform 0.35s var(--ease-out-expo),
+      box-shadow 0.35s ease;
+  }
+
+  .header.scrolled {
+    background: rgba(8, 7, 11, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 var(--border);
+  }
+
+  .header.hidden {
+    transform: translateY(-100%);
+  }
+
+  .header-inner {
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    transition: opacity 0.2s;
+  }
+
+  .logo:hover {
+    opacity: 0.8;
+  }
+
+  .logo-symbol {
+    color: var(--accent-gold);
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  .logo-text {
+    color: var(--text-primary);
+  }
+
+  .nav {
+    display: flex;
+    gap: 36px;
+  }
+
+  .nav-link {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+    position: relative;
+    transition: color 0.25s;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--accent-gold);
+    transition: width 0.3s var(--ease-out-expo);
+  }
+
+  .nav-link:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* ── Mobile toggle ── */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 200;
+  }
+
+  .bar {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition:
+      transform 0.3s var(--ease-out-expo),
+      opacity 0.2s;
+  }
+
+  .menu-toggle.open .bar:first-child {
+    transform: translateY(3.75px) rotate(45deg);
+  }
+
+  .menu-toggle.open .bar:last-child {
+    transform: translateY(-3.75px) rotate(-45deg);
+  }
+
+  /* ── Mobile overlay ── */
+  .mobile-nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: rgba(8, 7, 11, 0.96);
+    backdrop-filter: blur(24px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease-out-expo);
+  }
+
+  .mobile-nav-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .mobile-nav-link {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+  }
+
+  .mobile-nav-link:hover {
+    color: var(--accent-gold);
+  }
+
+  @media (max-width: 640px) {
+    .nav {
+      display: none;
+    }
+    .menu-toggle {
+      display: flex;
+    }
+  }
+</style>
